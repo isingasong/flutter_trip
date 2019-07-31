@@ -17,4 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 
 flutter学习项目
 1，仿携程app
-2，flutter各种空间的学习使用
+2，flutter各种控件的学习和使用
