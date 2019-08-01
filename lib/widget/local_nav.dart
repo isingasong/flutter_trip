@@ -22,40 +22,52 @@ class LocalNav extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(6.0)),
         ),
-        child: Padding(padding: EdgeInsets.all(8),
-        child: _items(context),),
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: _items(context),
+        ),
       ),
     );
   }
 
   _items(BuildContext context) {
-    if(localNavList == null) return null;
+    if (localNavList == null) return null;
     List<Widget> items = [];
-    localNavList.forEach((model){
-      items.add(_item(context,model));
+    localNavList.forEach((model) {
+      items.add(_item(context, model));
     });
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: items,
     );
-
-
   }
 
   Widget _item(BuildContext context, CommonModel model) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context){
-          return  WebView(url: model.url,statusBarColor: model.statusBarColor,);
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return WebView(
+            url: model.url,
+            title: model.title,
+            statusBarColor: model.statusBarColor,
+            hideAppBar: model.hideAppBar,
+          );
         }));
       },
       child: Column(
         children: <Widget>[
-          Image.network(model.icon,height: 32.0,width: 32.0,fit: BoxFit.fill,),
-          Text(model.title,style: TextStyle(fontSize: 12.0),)
+          Image.network(
+            model.icon,
+            height: 32.0,
+            width: 32.0,
+            fit: BoxFit.fill,
+          ),
+          Text(
+            model.title,
+            style: TextStyle(fontSize: 12.0),
+          )
         ],
       ),
     );
-
   }
 }

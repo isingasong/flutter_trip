@@ -99,10 +99,12 @@ class _WebViewState extends State<WebView> {
                   child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 2,
+                    height: MediaQuery.of(context).size.height / 3,
                   ),
                   CircularProgressIndicator(
                     backgroundColor: Colors.blue,
+                    value: 4.0,
+
                   ),
                   SizedBox(height: 16.0,),
                   Text(
@@ -122,17 +124,18 @@ class _WebViewState extends State<WebView> {
     if (widget.hideAppBar ?? false) {
       return Container(
         color: backgroundColor,
-        height: 30.0,
+        height: 23.0,
       );
     }
     return Container(
+    color: backgroundColor,
       child: FractionallySizedBox(
         widthFactor: 1.0,
         child: Stack(
           children: <Widget>[
             GestureDetector(
               child: Container(
-                margin: EdgeInsets.only(left: 10.0,top: 22.0),
+                margin: EdgeInsets.only(left: 10.0,top: 26.0),
                 padding: EdgeInsets.all(8.0),
                 child: Icon(
                   Icons.arrow_back,
@@ -147,6 +150,8 @@ class _WebViewState extends State<WebView> {
             Positioned(
                 left: 0.0,
                 right: 0.0,
+                bottom: 0.0,
+                top: 26.0,
                 child: Center(
                   child: Text(
                     widget.title ?? "",

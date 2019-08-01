@@ -20,28 +20,29 @@ class BannerWidget extends StatefulWidget {
 class _BannerWidgetState extends State<BannerWidget> {
   @override
   Widget build(BuildContext context) {
-
-    return widget.bannerList == null ? null :Container(
-        height: 200.0,
-        child: Swiper(
-          itemCount: widget.bannerList.length,
-          autoplay: true,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return   WebView(url: widget.bannerList[index].url);
-                }));
-
+    return widget.bannerList == null
+        ? null
+        : Container(
+            height: 200.0,
+            child: Swiper(
+              itemCount: widget.bannerList.length,
+              autoplay: true,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return WebView(url: widget.bannerList[index].url);
+                    }));
+                  },
+                  child: Image.network(
+                    widget.bannerList[index].icon,
+                    fit: BoxFit.fill,
+                  ),
+                );
               },
-              child: Image.network(
-                widget.bannerList[index].icon,
-                fit: BoxFit.fill,
-              ),
-            );
-          },
-          pagination: SwiperPagination(),
-        ),
-    );
+              pagination: SwiperPagination(),
+            ),
+          );
   }
 }

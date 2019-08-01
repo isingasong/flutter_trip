@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_trip/dao/home_dao.dart';
 import 'package:flutter_trip/model/banner_model.dart';
 import 'package:flutter_trip/model/common_model.dart';
+import 'package:flutter_trip/model/grid_nav_item_model.dart';
+import 'package:flutter_trip/model/grid_nav_model.dart';
 import 'package:flutter_trip/model/home_model.dart';
+import 'package:flutter_trip/model/sales_box_model.dart';
 import 'package:flutter_trip/widget/banner_widget.dart';
+import 'package:flutter_trip/widget/grid_nav.dart';
 import 'package:flutter_trip/widget/local_nav.dart';
+import 'package:flutter_trip/widget/sales_box.dart';
+import 'package:flutter_trip/widget/sub_nav.dart';
 
 ///
 /// Created by Maker on 2019/7/31.
@@ -20,6 +26,9 @@ class _HomeState extends State<Home> {
   static const scrollDistance = 80.0;
   List<CommonModel> localNavList = [];
   List<BannerModel> bannerList = [];
+  GridNavModel gridNavModel;
+  List<CommonModel> subNavList;
+  SalesBoxModel salesBox;
   HomeModel homeModel;
 
   double distance = 0.0;
@@ -49,6 +58,9 @@ class _HomeState extends State<Home> {
       setState(() {
         bannerList = homeModel.bannerList;
         localNavList = homeModel.localNavList;
+        gridNavModel = homeModel.gridNav;
+        subNavList = homeModel.subNavList;
+        salesBox = homeModel.salesBox;
       });
     } catch (e) {
       print(e.toString());
@@ -82,6 +94,10 @@ class _HomeState extends State<Home> {
               children: <Widget>[
                 BannerWidget(bannerList: bannerList),
                 LocalNav(localNavList: localNavList),
+                GridNav(gridNavModel: gridNavModel),
+                SubNav(subNavList: subNavList,),
+                SalesBox(salesBox:salesBox),
+
               ],
             )));
   }
@@ -91,11 +107,11 @@ class _HomeState extends State<Home> {
     return Opacity(
       opacity: opacity,
       child: Container(
-        height: 80.0,
+        height: 76.0,
         color: Colors.white,
         child: Center(
           child: Padding(
-            padding: EdgeInsets.only(top: 10.0),
+            padding: EdgeInsets.only(top: 23.0),
             child: Text("Home"),
           ),
         ),
