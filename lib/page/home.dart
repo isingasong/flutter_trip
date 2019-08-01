@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_trip/common/search_bar_type.dart';
+import 'package:flutter_trip/common/strings.dart';
 import 'package:flutter_trip/dao/home_dao.dart';
 import 'package:flutter_trip/model/banner_model.dart';
 import 'package:flutter_trip/model/common_model.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_trip/widget/banner_widget.dart';
 import 'package:flutter_trip/widget/grid_nav.dart';
 import 'package:flutter_trip/widget/local_nav.dart';
 import 'package:flutter_trip/widget/sales_box.dart';
+import 'package:flutter_trip/widget/search_bar.dart';
 import 'package:flutter_trip/widget/sub_nav.dart';
 
 ///
@@ -104,18 +107,44 @@ class _HomeState extends State<Home> {
 
 
   Widget get appBar {
-    return Opacity(
-      opacity: opacity,
-      child: Container(
-        height: 76.0,
-        color: Colors.white,
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.only(top: 23.0),
-            child: Text("Home"),
+    return Column(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            gradient:   LinearGradient(colors: [
+              Color(0x66000000),Colors.transparent
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter),
+          ),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(0.0, 24.0, 0.0, 0.0),
+            height: 80.0,
+            decoration: BoxDecoration(
+              color: Color.fromARGB((opacity * 255).toInt(), 255, 255, 255),
+            ),
+            child: SearchBar(
+              searchBarType: opacity > 0.2 ?  SearchBarType.homeLight : SearchBarType.home,
+              inputBoxClick: _gotoSearch,
+              speakButtonClick: _gotoSpeak,
+              defaultText: Strings.HOME_SEARCH_DEFAULT,
+              leftButtonClick: (){},
+            ),
           ),
         ),
-      ),
+        Container(
+          height: opacity > 0.2 ? 0.5 : 0,
+          decoration: BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.black12,blurRadius: 0.5),],
+          ),
+        ),
+      ],
     );
+  }
+
+  void _gotoSearch() {
+  }
+
+  void _gotoSpeak() {
   }
 }
