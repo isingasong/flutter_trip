@@ -25,6 +25,12 @@ class _NavigationState extends State<Navigation> {
     return Scaffold(
       body: PageView(
         controller: _controller,
+        onPageChanged: (index){
+          _controller.jumpToPage(index);
+          setState(() {
+            _currentIndex = index;
+          });
+        },
         children: <Widget>[
           Home(),
           Search(),
