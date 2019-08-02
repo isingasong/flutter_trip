@@ -1,45 +1,26 @@
+import 'package:flutter_trip/model/search_item.dart';
+
 ///
-/// Created by Maker on 2019/8/1.
+/// Created by Maker on 2019/8/2.
 /// Description:
 ///
 
 class SearchModel {
-  String word;
-  String type;
-  String price;
-  String star;
-  String zonename;
-  String districtname;
-  String url;
+  String keyWord;
+  List<SearchItem> data;
 
-  SearchModel(
-      {this.word,
-      this.type,
-      this.price,
-      this.star,
-      this.zonename,
-      this.districtname,
-      this.url});
+  SearchModel({this.data});
+
+  SearchModel.fromJson(Map<String, dynamic> json) {
+    var dataJson = json["data"] as List;
+    List<SearchItem> mData =
+        dataJson.map((item) => SearchItem.fromJson(item)).toList();
+    data = mData;
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["word"] = this.word;
-    data["type"] = this.type;
-    data["price"] = this.price;
-    data["star"] = this.star;
-    data["zonename"] = this.zonename;
-    data["districtname"] = this.districtname;
-    data["url"] = this.url;
+    data["data"] = this.data;
     return data;
-  }
-
-  SearchModel.fromJson(Map<String, dynamic> json) {
-    word = json["word"];
-    type = json["type"];
-    price = json["price"];
-    star = json["star"];
-    zonename = json["zonename"];
-    districtname = json["districtname"];
-    url = json["url"];
   }
 }
