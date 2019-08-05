@@ -121,13 +121,19 @@ class _SearchState extends State<Search> {
       },
       child: Container(
         padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: BorderSide(
+                  width: 0.5,
+          color: Colors.grey[300],
+        ))),
         child: Row(
           children: <Widget>[
             Container(
               child: Image(
                 image: AssetImage(_getAssetsImage(item.type)),
-                height: 26.0,
-                width: 26.0,
+                height: 30.0,
+                width: 30.0,
               ),
               margin: EdgeInsets.only(right: 16.0),
             ),
@@ -136,16 +142,8 @@ class _SearchState extends State<Search> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  child: RichText(
-                      text: TextSpan(
-                          text: item.word,
-                          style: TextStyle(color: Colours.color_99),
-                          children: [
-                        TextSpan(
-                            text:
-                                " ${item.districtname ?? ""} ${item.zonename ?? ""}",
-                            style: TextStyle(color: Colours.color_33,),),
-                      ])),
+                  width: 290.0,
+                  child: _setTitle(item),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 4.0),
@@ -155,12 +153,15 @@ class _SearchState extends State<Search> {
                           style: TextStyle(color: Colors.orange),
                           children: [
                         TextSpan(
-                            text: "   ${item.star ?? ""}",
-                            style: TextStyle(color: Colours.color_33)),
+                          text: "   ${item.star ?? ""}",
+                          style: TextStyle(
+                            color: Colours.color_33,
+                          ),
+                        ),
                       ])),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -180,5 +181,35 @@ class _SearchState extends State<Search> {
       }
     }
     return "assets/type_$path.png";
+  }
+
+  _setTitle(SearchItem item) {
+    if (item == null) return null;
+    List<TextSpan> spans = [];
+    spans.addAll(_keyWordSpan(item.word, model.keyWord));
+    spans.add(TextSpan(
+        text: " ${item.districtname ?? ""} ${item.zonename ?? ""}",
+        style: TextStyle(
+          color: Colours.color_33,
+        )));
+    return RichText(text: TextSpan(children: spans));
+  }
+
+  _keyWordSpan(String word, String keyWord) {
+    List<TextSpan> spans = [];
+    if (word == null || word.length == 0) return spans;
+    List<String> strings = word.split(keyWord);
+    for (int i = 0; i < strings.length; i++) {
+      if ((i + 1) % 2 == 0) {
+        spans.add(
+            TextSpan(text: keyWord, style: TextStyle(color: Colors.orange)));
+      }
+      String value = strings[i];
+      if (value != null && value.length > 0) {
+        spans.add(
+            TextSpan(text: value, style: TextStyle(color: Colours.color_99)));
+      }
+    }
+    return spans;
   }
 }
