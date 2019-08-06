@@ -9,6 +9,7 @@ import 'package:flutter_trip/model/grid_nav_model.dart';
 import 'package:flutter_trip/model/home_model.dart';
 import 'package:flutter_trip/model/sales_box_model.dart';
 import 'package:flutter_trip/page/search.dart';
+import 'package:flutter_trip/page/speak.dart';
 import 'package:flutter_trip/widget/banner_widget.dart';
 import 'package:flutter_trip/widget/grid_nav.dart';
 import 'package:flutter_trip/widget/local_nav.dart';
@@ -150,5 +151,8 @@ class _HomeState extends State<Home> {
   }
 
   void _gotoSpeak() {
+    Navigator.push(context,MaterialPageRoute(builder: (context){
+      return Speak();
+    }));
   }
 }

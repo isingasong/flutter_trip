@@ -5,6 +5,7 @@ import 'package:flutter_trip/dao/api.dart';
 import 'package:flutter_trip/dao/search_dao.dart';
 import 'package:flutter_trip/model/search_item.dart';
 import 'package:flutter_trip/model/search_model.dart';
+import 'package:flutter_trip/page/speak.dart';
 import 'package:flutter_trip/widget/search_bar.dart';
 import 'package:flutter_trip/widget/webview.dart';
 
@@ -34,6 +35,14 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   String keyword = "";
   SearchModel model;
+  
+  @override
+  void initState() {
+    if(widget.keyword != null){
+      _onTextChanged(widget.keyword);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +105,7 @@ class _SearchState extends State<Search> {
               hideLeft: widget.hideLeft,
               defaultText: widget.keyword,
               hint: widget.hint,
+              speakButtonClick: _gotoSpeak,
               leftButtonClick: () {
                 Navigator.pop(context);
               },
@@ -105,6 +115,12 @@ class _SearchState extends State<Search> {
         )
       ],
     );
+  }
+
+  void _gotoSpeak() {
+    Navigator.push(context,MaterialPageRoute(builder: (context){
+      return Speak();
+    }));
   }
 
   Widget _item(int index) {
