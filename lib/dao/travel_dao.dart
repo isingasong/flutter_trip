@@ -54,6 +54,7 @@ class TravelDao{
       Utf8Decoder utf8coder = Utf8Decoder();
       var result = json.decode(utf8coder.convert(response.bodyBytes));
       TravelModel model = TravelModel.fromJson(result);
+      print("TabData::;${model.toString()}");
       return model;
     } else {
       throw Exception("Failed to load data...");

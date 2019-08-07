@@ -28,5 +28,12 @@ class TravelModel {
     }
     return data;
   }
+
+  @override
+  String toString() {
+    return 'TravelModel{totalCount: $totalCount, travelItems: $travelItems}';
+  }
+
+
 }
 
