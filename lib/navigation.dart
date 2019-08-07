@@ -25,6 +25,7 @@ class _NavigationState extends State<Navigation> {
     return Scaffold(
       body: PageView(
         controller: _controller,
+        physics: NeverScrollableScrollPhysics(),
         onPageChanged: (index) {
           _controller.jumpToPage(index);
           setState(() {

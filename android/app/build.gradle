@@ -21,8 +21,8 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.android.application'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 
 android {
@@ -40,10 +40,10 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        ndk {
-            abiFilters "armeabi-v7a","arm64-v8a","x86_64","x86" //只打包flutter所支持的架构，flutter没有armeabi架构的so，加x86的原因是为了能够兼容模拟器
-//            abiFilters "armeabi-v7a" //release 时只打"armeabi-v7包
-        }
+//        ndk {
+//            abiFilters "armeabi-v7a","arm64-v8a","x86_64","x86" //只打包flutter所支持的架构，flutter没有armeabi架构的so，加x86的原因是为了能够兼容模拟器
+////            abiFilters "armeabi-v7a" //release 时只打"armeabi-v7包
+//        }
     }
 
     buildTypes {
@@ -54,13 +54,13 @@ android {
         }
     }
 
-    packagingOptions {
-        // 确保app与asr_plugin都依赖的libflutter.so libapp.so merge时不冲突@https://github.com/card-io/card.io-Android-SDK/issues/186#issuecomment-427552552
-        pickFirst 'lib/x86_64/libflutter.so'
-        pickFirst 'lib/x86/libflutter.so'
-        pickFirst 'lib/arm64-v8a/libflutter.so'
-        pickFirst 'lib/arm64-v8a/libapp.so'
-    }
+//    packagingOptions {
+//        // 确保app与asr_plugin都依赖的libflutter.so libapp.so merge时不冲突@https://github.com/card-io/card.io-Android-SDK/issues/186#issuecomment-427552552
+//        pickFirst 'lib/x86_64/libflutter.so'
+//        pickFirst 'lib/x86/libflutter.so'
+//        pickFirst 'lib/arm64-v8a/libflutter.so'
+//        pickFirst 'lib/arm64-v8a/libapp.so'
+//    }
 }
 
 flutter {
@@ -71,5 +71,4 @@ dependencies {
     testImplementation 'junit:junit:4.13-beta-3'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation project(path: ':asr_plugin')
 }

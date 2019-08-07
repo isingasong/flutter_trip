@@ -167,7 +167,6 @@ class _SpeakState extends State<Speak> with SingleTickerProviderStateMixin {
     _speakTips = " — 按住说话 — ";
     setState(() {});
     AsrManager.stop().then((result){
-
     });
   }
 }
